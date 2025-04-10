@@ -1,39 +1,203 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Streaming & Student Challenge</title>
+  <style>
+    body {
+      background-color: #1e1e2f;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
 
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js"></script>
+    header {
+      font-size: 2.5rem;
+      color: #ffdd57;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #444;
+    }
 
-    <title>Desafio - Exercícios 1 e 2</title>
+    section {
+      background-color: #292942;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #ffdd57;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #ccc;
+    }
+
+    .problem {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: #aaa;
+    }
+
+    input {
+      display: block;
+      width: 80%;
+      margin: 0.3rem auto;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #1e1e30;
+      color: #fff;
+      outline: none;
+      box-shadow: inset 0 0 5px #000;
+    }
+
+    input[type="number"] {
+      appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    button {
+      background-color: #ffdd57;
+      color: #292942;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffe97f;
+      transform: scale(1.05);
+    }
+
+    img {
+      display: block;
+      width: 85%;
+      margin: 1.5rem auto 0;
+      border-radius: 12px;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #90ee90;
+    }
+
+    .student-group {
+      background-color: #1e1e30;
+      padding: 1rem;
+      margin: 1rem auto;
+      border-radius: 12px;
+      width: 90%;
+    }
+
+    .student-group input {
+      margin: 0.5rem auto;
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <p>Exercício 2 - Estrutura de Repetição While</p>
-    </header>
+  <header>
+    Streaming & Student Challenge
+  </header>
 
-    <p>Exercício 1: Campeã de Streaming</p>
+  <section>
+    <h2>Streaming Queen 🎵</h2>
+    <p class="problem">
+      Situation: You're managing a music platform and need to determine which song was played the most. Help find the most streamed track!
+    </p>
+    <input type="number" id="musica1" placeholder="Song 1 - Streams" min="0">
+    <input type="number" id="musica2" placeholder="Song 2 - Streams" min="0">
+    <input type="number" id="musica3" placeholder="Song 3 - Streams" min="0">
+    <button onclick="verificaMusica()">Check the most played</button>
+    <div id="resultadoMusica" class="result"></div>
+    <img src="./img/streaming.jfif" alt="Streaming illustration">
+  </section>
 
-    <button class="button1" onclick="verificaMusica()">Verifique!</button>
-    <p></p>
-    <img src="./img/streaming.jfif">
+  <section>
+    <h2>Top Student 📚</h2>
+    <p class="problem">
+      Situation: A teacher wants to reward the student with the highest score. Help find out who deserves to be recognized!
+    </p>
 
-    <p>Exercício 2: Melhor Aluno</p>
+    <div class="student-group">
+      <input type="text" id="nome1" placeholder="Student 1 - Name">
+      <input type="number" id="nota1" placeholder="Score" min="0">
+    </div>
 
-    <button class="button2" onclick="verificaNota()">Verifique!</button>
-    <p></p>
-    <img src="./img/melhoraluno.jfif">
+    <div class="student-group">
+      <input type="text" id="nome2" placeholder="Student 2 - Name">
+      <input type="number" id="nota2" placeholder="Score" min="0">
+    </div>
 
-    <footer>
-        <p>
-            Giulia Galzerano Schiavetto | Guilherme da Silva Oliveira | Manuela Galzerano Schiavetto | Pedro Silva
-        </p>
-    </footer>
+    <div class="student-group">
+      <input type="text" id="nome3" placeholder="Student 3 - Name">
+      <input type="number" id="nota3" placeholder="Score" min="0">
+    </div>
+
+    <button onclick="verificaNota()">Check the top student</button>
+    <div id="resultadoNota" class="result"></div>
+    <img src="./img/melhoraluno.jfif" alt="Student illustration">
+  </section>
+
+  <script>
+    function verificaMusica() {
+      const s1 = Math.max(0, parseInt(document.getElementById('musica1').value) || 0);
+      const s2 = Math.max(0, parseInt(document.getElementById('musica2').value) || 0);
+      const s3 = Math.max(0, parseInt(document.getElementById('musica3').value) || 0);
+
+      const max = Math.max(s1, s2, s3);
+      let result = `Most played song had ${max} streams.`;
+
+      document.getElementById('resultadoMusica').innerText = result;
+    }
+
+    function verificaNota() {
+      const nomes = [
+        document.getElementById('nome1').value,
+        document.getElementById('nome2').value,
+        document.getElementById('nome3').value
+      ];
+      const notas = [
+        Math.max(0, parseInt(document.getElementById('nota1').value) || 0),
+        Math.max(0, parseInt(document.getElementById('nota2').value) || 0),
+        Math.max(0, parseInt(document.getElementById('nota3').value) || 0)
+      ];
+
+      const maxNota = Math.max(...notas);
+      let vencedores = [];
+
+      notas.forEach((nota, index) => {
+        if (nota === maxNota && nomes[index]) {
+          vencedores.push(nomes[index]);
+        }
+      });
+
+      let resultado = vencedores.length > 1
+        ? `Top students: ${vencedores.join(', ')} with ${maxNota} points!`
+        : `Top student: ${vencedores[0]} with ${maxNota} points!`;
+
+      document.getElementById('resultadoNota').innerText = resultado;
+    }
+  </script>
 </body>
-
 </html>
